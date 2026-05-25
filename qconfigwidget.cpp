@@ -36,9 +36,6 @@ void QConfigWidget::initProjects()
 {
     QStringList projects = {
         QStringLiteral("项目 Alpha"),
-        QStringLiteral("项目 Beta"),
-        QStringLiteral("项目 Gamma"),
-        QStringLiteral("项目 Delta"),
         QStringLiteral("uv")
     };
 
@@ -70,10 +67,11 @@ QTabWidget *QConfigWidget::createConfigTabs(const QString &projectName)
     };
 
     for (const auto &info : tabInfos) {
-        // uv 项目使用独立的 UVSetup 页面（uv.ui），其他项目使用 ConfigPage（configpage.ui）
+        // uv 项目只保留"基本设置"，使用独立的 UVSetup 页面（uv.ui）
         if (projectName == QStringLiteral("uv")) {
             auto *page = new UVSetup(info.desc);
             tabs->addTab(page, info.title);
+            break;  // uv 只添加第一个 tab
         } else {
             auto *page = new ConfigPage(info.desc);
             tabs->addTab(page, info.title);
