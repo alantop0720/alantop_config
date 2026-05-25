@@ -33,14 +33,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QTabWidget" name="configTabs">
-      <property name="tabsClosable">
-       <bool>false</bool>
-      </property>
-      <property name="movable">
-       <bool>false</bool>
-      </property>
-     </widget>
+     <widget class="QStackedWidget" name="configStack"/>
     </widget>
    </item>
   </layout>

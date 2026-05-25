@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+class QTabWidget;
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class QConfigWidget;
@@ -22,7 +24,7 @@ private slots:
 
 private:
     void initProjects();
-    void initConfigTabs();
+    QTabWidget *createConfigTabs(const QString &projectName);
 
     Ui::QConfigWidget *ui;
 };

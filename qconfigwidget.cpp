@@ -1,7 +1,11 @@
 #include "qconfigwidget.h"
 #include "./ui_qconfigwidget.h"
+#include "configpage.h"
+#include "uv.h"
 
 #include <QListWidgetItem>
+#include <QStackedWidget>
+#include <QTabWidget>
 
 QConfigWidget::QConfigWidget(QWidget *parent)
     : QWidget(parent)
@@ -9,15 +13,18 @@ QConfigWidget::QConfigWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // 初始化左右分栏比例 3:7
     ui->splitter->setStretchFactor(0, 3);
     ui->splitter->setStretchFactor(1, 7);
 
     initProjects();
-    initConfigTabs();
 
     connect(ui->projectList, &QListWidget::currentRowChanged,
             this, &QConfigWidget::onProjectSelected);
+
+    // 默认选中第一个项目
+    if (ui->projectList->count() > 0) {
+        ui->projectList->setCurrentRow(0);
+    }
 }
 
 QConfigWidget::~QConfigWidget()
@@ -31,33 +38,56 @@ void QConfigWidget::initProjects()
         QStringLiteral("项目 Alpha"),
         QStringLiteral("项目 Beta"),
         QStringLiteral("项目 Gamma"),
-        QStringLiteral("项目 Delta")
+        QStringLiteral("项目 Delta"),
+        QStringLiteral("uv")
     };
 
     for (const auto &name : projects) {
         auto *item = new QListWidgetItem(name, ui->projectList);
         item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
         item->setCheckState(Qt::Checked);
+
+        // 每个项目创建一套独立的 Tab 页，放入 QStackedWidget
+        QTabWidget *tabs = createConfigTabs(name);
+        ui->configStack->addWidget(tabs);
     }
 }
 
-void QConfigWidget::initConfigTabs()
+QTabWidget *QConfigWidget::createConfigTabs(const QString &projectName)
 {
-    // 创建几个示例配置 Tab 页
-    ui->configTabs->addTab(new QWidget(), QStringLiteral("基本设置"));
-    ui->configTabs->addTab(new QWidget(), QStringLiteral("编译选项"));
-    ui->configTabs->addTab(new QWidget(), QStringLiteral("运行参数"));
-    ui->configTabs->addTab(new QWidget(), QStringLiteral("高级配置"));
+    auto *tabs = new QTabWidget();
+
+    struct TabInfo {
+        QString title;
+        QString desc;
+    };
+
+    QList<TabInfo> tabInfos = {
+        { QStringLiteral("基本设置"), projectName + QStringLiteral(" - 基本设置页") },
+        { QStringLiteral("编译选项"), projectName + QStringLiteral(" - 编译选项页") },
+        { QStringLiteral("运行参数"), projectName + QStringLiteral(" - 运行参数页") },
+        { QStringLiteral("高级配置"), projectName + QStringLiteral(" - 高级配置页") }
+    };
+
+    for (const auto &info : tabInfos) {
+        // uv 项目使用独立的 UVSetup 页面（uv.ui），其他项目使用 ConfigPage（configpage.ui）
+        if (projectName == QStringLiteral("uv")) {
+            auto *page = new UVSetup(info.desc);
+            tabs->addTab(page, info.title);
+        } else {
+            auto *page = new ConfigPage(info.desc);
+            tabs->addTab(page, info.title);
+        }
+    }
+
+    return tabs;
 }
 
 void QConfigWidget::onProjectSelected(int row)
 {
-    if (row < 0)
+    if (row < 0 || row >= ui->configStack->count())
         return;
 
-    auto *item = ui->projectList->item(row);
-    if (item) {
-        // 选中项目时自动切到第一个配置 Tab
-        ui->configTabs->setCurrentIndex(0);
-    }
+    // 切换到对应项目的 Tab 页集
+    ui->configStack->setCurrentIndex(row);
 }
