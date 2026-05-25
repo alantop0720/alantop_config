@@ -1,6 +1,7 @@
 #include "uv.h"
 #include "./ui_uv.h"
 
+#include <QDir>
 #include <QFileDialog>
 #include <QProcess>
 
@@ -75,10 +76,20 @@ void UVSetup::onBrowsePythonDir()
 
 void UVSetup::onSetEnvVars()
 {
-    setUserEnvVar(QStringLiteral("UV_CACHE_DIR"),
-                  ui->lineEdit_NEW_CACHE_DIR->text());
-    setUserEnvVar(QStringLiteral("UV_PYTHON_INSTALL_DIR"),
-                  ui->lineEdit_PYTHON_DIR->text());
+    QString cacheDir = ui->lineEdit_NEW_CACHE_DIR->text();
+    QString pythonDir = ui->lineEdit_PYTHON_DIR->text();
+
+    // 检测目录是否存在，不存在则创建
+    QDir dir;
+    if (!dir.exists(cacheDir)) {
+        dir.mkpath(cacheDir);
+    }
+    if (!dir.exists(pythonDir)) {
+        dir.mkpath(pythonDir);
+    }
+
+    setUserEnvVar(QStringLiteral("UV_CACHE_DIR"), cacheDir);
+    setUserEnvVar(QStringLiteral("UV_PYTHON_INSTALL_DIR"), pythonDir);
 }
 
 void UVSetup::setUserEnvVar(const QString &name, const QString &value)
