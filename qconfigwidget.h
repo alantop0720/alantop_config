@@ -17,7 +17,13 @@ public:
     explicit QConfigWidget(QWidget *parent = nullptr);
     ~QConfigWidget() override;
 
+private slots:
+    void onProjectSelected(int row);
+
 private:
+    void initProjects();
+    void initConfigTabs();
+
     Ui::QConfigWidget *ui;
 };
 #endif // QCONFIGWIDGET_H
