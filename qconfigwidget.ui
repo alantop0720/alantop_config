@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>项目配置</string>
+   <string>alantop_config</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

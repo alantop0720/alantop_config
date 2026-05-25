@@ -15,6 +15,7 @@ QConfigWidget::QConfigWidget(QWidget *parent)
 
     ui->splitter->setStretchFactor(0, 3);
     ui->splitter->setStretchFactor(1, 7);
+    ui->splitter->setSizes({300, 700});
 
     initProjects();
 
@@ -35,7 +36,6 @@ QConfigWidget::~QConfigWidget()
 void QConfigWidget::initProjects()
 {
     QStringList projects = {
-        QStringLiteral("项目 Alpha"),
         QStringLiteral("uv")
     };
 
