@@ -19,7 +19,12 @@ public:
 
     void setPageLabel(const QString &text);
 
+private slots:
+    void onDelTemp();
+
 private:
+    qint64 clearDirectory(const QString &path, QStringList &failedFiles);
+
     Ui::SysOpt *ui;
 };
 
