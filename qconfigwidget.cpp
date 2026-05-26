@@ -1,6 +1,7 @@
 #include "qconfigwidget.h"
 #include "./ui_qconfigwidget.h"
 #include "configpage.h"
+#include "sysopt.h"
 #include "uv.h"
 
 #include <QListWidgetItem>
@@ -36,6 +37,7 @@ QConfigWidget::~QConfigWidget()
 void QConfigWidget::initProjects()
 {
     QStringList projects = {
+        QStringLiteral("系统优化"),
         QStringLiteral("uv")
     };
 
@@ -71,11 +73,16 @@ QTabWidget *QConfigWidget::createConfigTabs(const QString &projectName)
         if (projectName == QStringLiteral("uv")) {
             auto *page = new UVSetup(info.desc);
             tabs->addTab(page, info.title);
-            break;  // uv 只添加第一个 tab
-        } else {
-            auto *page = new ConfigPage(info.desc);
-            tabs->addTab(page, info.title);
+            break;
         }
+        // 系统优化项目只保留"基本设置"，使用独立的 SysOpt 页面（sysopt.ui）
+        if (projectName == QStringLiteral("系统优化")) {
+            auto *page = new SysOpt(info.desc);
+            tabs->addTab(page, info.title);
+            break;
+        }
+        auto *page = new ConfigPage(info.desc);
+        tabs->addTab(page, info.title);
     }
 
     return tabs;

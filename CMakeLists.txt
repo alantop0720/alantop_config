@@ -23,6 +23,9 @@ set(PROJECT_SOURCES
         uv.cpp
         uv.h
         uv.ui
+        sysopt.cpp
+        sysopt.h
+        sysopt.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
