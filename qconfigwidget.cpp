@@ -1,6 +1,5 @@
 #include "qconfigwidget.h"
 #include "./ui_qconfigwidget.h"
-#include "configpage.h"
 #include "sysopt.h"
 #include "uv.h"
 
@@ -79,8 +78,6 @@ QTabWidget *QConfigWidget::createConfigTabs(const QString &projectName)
             tabs->addTab(page, info.title);
             break;
         }
-        auto *page = new ConfigPage(info.desc);
-        tabs->addTab(page, info.title);
     }
 
     return tabs;

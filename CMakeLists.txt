@@ -17,9 +17,6 @@ set(PROJECT_SOURCES
         qconfigwidget.cpp
         qconfigwidget.h
         qconfigwidget.ui
-        configpage.cpp
-        configpage.h
-        configpage.ui
         uv.cpp
         uv.h
         uv.ui

@@ -23,11 +23,13 @@ private slots:
     void onBrowseCacheDir();
     void onBrowsePythonDir();
     void onSetEnvVars();
+    void onReadEnvVars();
 
 private:
     void initUV();
     QString runUVCommand(const QString &args);
     void setUserEnvVar(const QString &name, const QString &value);
+    QString getUserEnvVar(const QString &name);
 
     Ui::UVSetup *ui;
 };

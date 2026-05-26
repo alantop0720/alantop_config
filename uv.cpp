@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QProcess>
+#include <QSettings>
 
 UVSetup::UVSetup(const QString &labelText, QWidget *parent)
     : QWidget(parent)
@@ -24,6 +25,8 @@ UVSetup::UVSetup(const QString &labelText, QWidget *parent)
             this, &UVSetup::onBrowsePythonDir);
     connect(ui->pushButton_set, &QPushButton::clicked,
             this, &UVSetup::onSetEnvVars);
+    connect(ui->pushButton_read, &QPushButton::clicked,
+            this, &UVSetup::onReadEnvVars);
 }
 
 UVSetup::~UVSetup()
@@ -90,6 +93,10 @@ void UVSetup::onSetEnvVars()
 
     setUserEnvVar(QStringLiteral("UV_CACHE_DIR"), cacheDir);
     setUserEnvVar(QStringLiteral("UV_PYTHON_INSTALL_DIR"), pythonDir);
+    setUserEnvVar(QStringLiteral("UV_DEFAULT_INDEX"),
+                  ui->lineEdit_default_index->text());
+    setUserEnvVar(QStringLiteral("UV_PYTHON_INSTALL_MIRROR"),
+                  ui->lineEdit_install_mirror->text());
 }
 
 void UVSetup::setUserEnvVar(const QString &name, const QString &value)
@@ -97,4 +104,20 @@ void UVSetup::setUserEnvVar(const QString &name, const QString &value)
     QProcess process;
     process.start("setx", QStringList() << name << value);
     process.waitForFinished(5000);
+}
+
+void UVSetup::onReadEnvVars()
+{
+    ui->lineEdit_default_index->setText(
+        getUserEnvVar(QStringLiteral("UV_DEFAULT_INDEX")));
+    ui->lineEdit_install_mirror->setText(
+        getUserEnvVar(QStringLiteral("UV_PYTHON_INSTALL_MIRROR")));
+}
+
+QString UVSetup::getUserEnvVar(const QString &name)
+{
+    QSettings envSettings(
+        QStringLiteral("HKEY_CURRENT_USER\\Environment"),
+        QSettings::NativeFormat);
+    return envSettings.value(name).toString();
 }

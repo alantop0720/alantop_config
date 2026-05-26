@@ -32,8 +32,8 @@
   <widget class="QLineEdit" name="lineEdit_CACHE_DIR">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>80</y>
+     <x>130</x>
+     <y>60</y>
      <width>501</width>
      <height>25</height>
     </rect>
@@ -42,8 +42,8 @@
   <widget class="QLineEdit" name="lineEdit_PTHON_DIR">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>150</y>
+     <x>150</x>
+     <y>110</y>
      <width>501</width>
      <height>25</height>
     </rect>
@@ -78,8 +78,8 @@
   <widget class="QLineEdit" name="lineEdit_NEW_CACHE_DIR">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>220</y>
+     <x>30</x>
+     <y>300</y>
      <width>501</width>
      <height>25</height>
     </rect>
@@ -91,8 +91,8 @@
   <widget class="QPushButton" name="pushButton_cache_dir">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>260</y>
+     <x>560</x>
+     <y>300</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -104,8 +104,8 @@
   <widget class="QPushButton" name="pushButton_python_dir">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>360</y>
+     <x>560</x>
+     <y>350</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -114,24 +114,11 @@
     <string>浏览</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_set">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>400</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>设置</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="lineEdit_PYTHON_DIR">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>320</y>
+     <x>30</x>
+     <y>350</y>
      <width>501</width>
      <height>25</height>
     </rect>
@@ -139,6 +126,103 @@
    <property name="text">
     <string>d:\alantop_dir\alantop_data\uv_python\</string>
    </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_default_index">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>160</y>
+     <width>371</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>https://pypi.tuna.tsinghua.edu.cn/simple</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>201</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>UV_DEFAULT_INDEX</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_install_mirror">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>210</y>
+     <width>681</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>https://ghfast.top/https://github.com/astral-sh/python-build-standalone/releases/download</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>210</y>
+     <width>261</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>UV_PYTHON_INSTALL_MIRROR</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_read">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>240</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>读取</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>410</y>
+     <width>102</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="Line" name="line">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_set">
+      <property name="text">
+       <string>设置</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
