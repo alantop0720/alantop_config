@@ -43,8 +43,6 @@ void QConfigWidget::initProjects()
 
     for (const auto &name : projects) {
         auto *item = new QListWidgetItem(name, ui->projectList);
-        item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-        item->setCheckState(Qt::Checked);
 
         // 每个项目创建一套独立的 Tab 页，放入 QStackedWidget
         QTabWidget *tabs = createConfigTabs(name);
