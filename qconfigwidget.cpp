@@ -13,9 +13,9 @@ QConfigWidget::QConfigWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->splitter->setStretchFactor(0, 3);
-    ui->splitter->setStretchFactor(1, 7);
-    ui->splitter->setSizes({300, 700});
+    ui->splitter->setStretchFactor(0, 1);
+    ui->splitter->setStretchFactor(1, 9);
+    //ui->splitter->setSizes({110, 990});
 
     initProjects();
 
