@@ -19,7 +19,14 @@ public:
 
     void setPageLabel(const QString &text);
 
+private slots:
+    void onRouteAdd();
+    void onRouteDelete();
+    void onRoutePrint();
+
 private:
+    void runRouteCommand(const QString &cmd, const QString &desc);
+
     Ui::RouteSetup *ui;
 };
 
