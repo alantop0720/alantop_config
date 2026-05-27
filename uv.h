@@ -24,6 +24,7 @@ private slots:
     void onBrowsePythonDir();
     void onSetEnvVars();
     void onReadEnvVars();
+    void onSelectDirAndInit();
 
 private:
     void initUV();

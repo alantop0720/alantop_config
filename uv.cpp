@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QProcess>
 #include <QSettings>
+#include <QStandardPaths>
 
 UVSetup::UVSetup(const QString &labelText, QWidget *parent)
     : QWidget(parent)
@@ -27,6 +28,8 @@ UVSetup::UVSetup(const QString &labelText, QWidget *parent)
             this, &UVSetup::onSetEnvVars);
     connect(ui->pushButton_read, &QPushButton::clicked,
             this, &UVSetup::onReadEnvVars);
+    connect(ui->pushButton_select_dir, &QPushButton::clicked,
+            this, &UVSetup::onSelectDirAndInit);
 }
 
 UVSetup::~UVSetup()
@@ -143,4 +146,45 @@ QString UVSetup::getUserEnvVar(const QString &name)
         QStringLiteral("HKEY_CURRENT_USER\\Environment"),
         QSettings::NativeFormat);
     return envSettings.value(name).toString();
+}
+
+void UVSetup::onSelectDirAndInit()
+{
+    const QString desktop = QStandardPaths::writableLocation(
+        QStandardPaths::DesktopLocation);
+
+    QString dir = QFileDialog::getExistingDirectory(
+        this, QStringLiteral("选择 uv 项目目录"), desktop);
+    if (dir.isEmpty()) {
+        return;
+    }
+
+    ui->lineEdit_project_dir->setText(dir);
+
+    QString cmd = ui->lineEdit_uv_init->text().trimmed();
+    if (cmd.isEmpty()) {
+        ui->statusLabel->setStyleSheet(QStringLiteral("color: red;"));
+        ui->statusLabel->setText(QStringLiteral("  初始化命令为空"));
+        return;
+    }
+
+    // 分割命令为程序名和参数
+    QStringList parts = cmd.split(' ', Qt::SkipEmptyParts);
+    QString program = parts.takeFirst();
+    QStringList args = parts;
+
+    QProcess process;
+    process.setWorkingDirectory(dir);
+    process.start(program, args);
+    process.waitForFinished(60000);
+
+    if (process.exitCode() == 0) {
+        ui->statusLabel->setStyleSheet(QStringLiteral("color: green;"));
+        ui->statusLabel->setText(QStringLiteral("  uv 项目初始化成功"));
+    } else {
+        QString err = QString::fromUtf8(process.readAllStandardError()).trimmed();
+        ui->statusLabel->setStyleSheet(QStringLiteral("color: red;"));
+        ui->statusLabel->setText(
+            QStringLiteral("  初始化失败: %1").arg(err));
+    }
 }
