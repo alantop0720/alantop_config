@@ -23,6 +23,9 @@ set(PROJECT_SOURCES
         sysopt.cpp
         sysopt.h
         sysopt.ui
+        route.cpp
+        route.h
+        route.ui
         resources.qrc
         app.rc
 )

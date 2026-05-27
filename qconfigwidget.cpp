@@ -1,5 +1,6 @@
 #include "qconfigwidget.h"
 #include "./ui_qconfigwidget.h"
+#include "route.h"
 #include "sysopt.h"
 #include "uv.h"
 
@@ -37,11 +38,12 @@ void QConfigWidget::initProjects()
 {
     QStringList projects = {
         QStringLiteral("系统优化"),
-        QStringLiteral("uv")
+        QStringLiteral("uv"),
+        QStringLiteral("路由设置")
     };
 
     for (const auto &name : projects) {
-        auto *item = new QListWidgetItem(name, ui->projectList);
+        new QListWidgetItem(name, ui->projectList);
 
         // 每个项目创建一套独立的 Tab 页，放入 QStackedWidget
         QTabWidget *tabs = createConfigTabs(name);
@@ -75,6 +77,12 @@ QTabWidget *QConfigWidget::createConfigTabs(const QString &projectName)
         // 系统优化项目只保留"基本设置"，使用独立的 SysOpt 页面（sysopt.ui）
         if (projectName == QStringLiteral("系统优化")) {
             auto *page = new SysOpt(info.desc);
+            tabs->addTab(page, info.title);
+            break;
+        }
+        // 路由设置项目只保留"基本设置"，使用独立的 RouteSetup 页面（route.ui）
+        if (projectName == QStringLiteral("路由设置")) {
+            auto *page = new RouteSetup(info.desc);
             tabs->addTab(page, info.title);
             break;
         }
