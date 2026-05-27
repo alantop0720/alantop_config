@@ -23,6 +23,8 @@ set(PROJECT_SOURCES
         sysopt.cpp
         sysopt.h
         sysopt.ui
+        resources.qrc
+        app.rc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
