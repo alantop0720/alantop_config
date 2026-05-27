@@ -43,6 +43,10 @@ void UVSetup::initUV()
 {
     ui->lineEdit_CACHE_DIR->setText(runUVCommand("cache dir"));
     ui->lineEdit_PTHON_DIR->setText(runUVCommand("python dir"));
+    ui->lineEdit_tool_dir->setText(runUVCommand("tool dir --bin"));
+
+
+
 }
 
 QString UVSetup::runUVCommand(const QString &args)
@@ -91,19 +95,38 @@ void UVSetup::onSetEnvVars()
         dir.mkpath(pythonDir);
     }
 
-    setUserEnvVar(QStringLiteral("UV_CACHE_DIR"), cacheDir);
-    setUserEnvVar(QStringLiteral("UV_PYTHON_INSTALL_DIR"), pythonDir);
-    setUserEnvVar(QStringLiteral("UV_DEFAULT_INDEX"),
-                  ui->lineEdit_default_index->text());
-    setUserEnvVar(QStringLiteral("UV_PYTHON_INSTALL_MIRROR"),
-                  ui->lineEdit_install_mirror->text());
+    QStringList failedVars;
+    auto checkAndSet = [&](const QString &name, const QString &value) {
+        if (!setUserEnvVar(name, value)) {
+            failedVars.append(name);
+        }
+    };
+
+    checkAndSet(QStringLiteral("UV_CACHE_DIR"), cacheDir);
+    checkAndSet(QStringLiteral("UV_PYTHON_INSTALL_DIR"), pythonDir);
+    checkAndSet(QStringLiteral("UV_DEFAULT_INDEX"),
+                ui->lineEdit_default_index->text());
+    checkAndSet(QStringLiteral("UV_PYTHON_INSTALL_MIRROR"),
+                ui->lineEdit_install_mirror->text());
+
+    if (failedVars.isEmpty()) {
+        ui->statusLabel->setStyleSheet(
+            QStringLiteral("color: green;"));
+        ui->statusLabel->setText(QStringLiteral("  操作成功"));
+    } else {
+        ui->statusLabel->setStyleSheet(
+            QStringLiteral("color: red;"));
+        ui->statusLabel->setText(
+            QStringLiteral("  设置失败: %1").arg(failedVars.join(QStringLiteral(", "))));
+    }
 }
 
-void UVSetup::setUserEnvVar(const QString &name, const QString &value)
+bool UVSetup::setUserEnvVar(const QString &name, const QString &value)
 {
     QProcess process;
     process.start("setx", QStringList() << name << value);
     process.waitForFinished(5000);
+    return process.exitCode() == 0;
 }
 
 void UVSetup::onReadEnvVars()

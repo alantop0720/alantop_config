@@ -28,7 +28,7 @@ private slots:
 private:
     void initUV();
     QString runUVCommand(const QString &args);
-    void setUserEnvVar(const QString &name, const QString &value);
+    bool setUserEnvVar(const QString &name, const QString &value);
     QString getUserEnvVar(const QString &name);
 
     Ui::UVSetup *ui;
