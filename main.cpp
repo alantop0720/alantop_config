@@ -6,6 +6,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QConfigWidget w;
-    w.show();
+    w.showMaximized();
     return QApplication::exec();
 }
