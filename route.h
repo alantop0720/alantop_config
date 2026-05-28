@@ -23,6 +23,7 @@ private slots:
     void onRouteAdd();
     void onRouteDelete();
     void onRoutePrint();
+    void onIp();
 
 private:
     void runRouteCommand(const QString &cmd, const QString &desc);

@@ -16,6 +16,8 @@ RouteSetup::RouteSetup(const QString &labelText, QWidget *parent)
             this, &RouteSetup::onRouteDelete);
     connect(ui->pushButton_route_print, &QPushButton::clicked,
             this, &RouteSetup::onRoutePrint);
+    connect(ui->pushButton_ip, &QPushButton::clicked,
+            this, &RouteSetup::onIp);
 }
 
 RouteSetup::~RouteSetup()
@@ -78,4 +80,10 @@ void RouteSetup::runRouteCommand(const QString &cmd, const QString &desc)
         ui->plainTextEdit_stat->appendPlainText(
             QStringLiteral("退出码: %1\n").arg(process.exitCode()));
     }
+}
+
+void RouteSetup::onIp()
+{
+    runRouteCommand(ui->lineEdit_ip->text(),
+                    QStringLiteral("IP 信息"));
 }
