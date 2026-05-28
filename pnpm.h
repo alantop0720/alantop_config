@@ -17,7 +17,15 @@ public:
     explicit PnpmSetup(const QString &labelText, QWidget *parent = nullptr);
     ~PnpmSetup() override;
 
+private slots:
+    void onLs();
+    void onRoot();
+    void onRm();
+    void onUninstall();
+
 private:
+    void runPnpmCommand(const QString &cmd, const QString &desc);
+
     Ui::PnpmSetup *ui;
 };
 
