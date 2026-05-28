@@ -1,5 +1,6 @@
 #include "qconfigwidget.h"
 #include "./ui_qconfigwidget.h"
+#include "pnpm.h"
 #include "route.h"
 #include "sysopt.h"
 #include "uv.h"
@@ -39,7 +40,8 @@ void QConfigWidget::initProjects()
     QStringList projects = {
         QStringLiteral("系统优化"),
         QStringLiteral("uv"),
-        QStringLiteral("路由设置")
+        QStringLiteral("路由设置"),
+        QStringLiteral("pnpm")
     };
 
     for (const auto &name : projects) {
@@ -83,6 +85,12 @@ QTabWidget *QConfigWidget::createConfigTabs(const QString &projectName)
         // 路由设置项目只保留"基本设置"，使用独立的 RouteSetup 页面（route.ui）
         if (projectName == QStringLiteral("路由设置")) {
             auto *page = new RouteSetup(info.desc);
+            tabs->addTab(page, info.title);
+            break;
+        }
+        // pnpm 项目只保留"基本设置"，使用独立的 PnpmSetup 页面（pnpm.ui）
+        if (projectName == QStringLiteral("pnpm")) {
+            auto *page = new PnpmSetup(info.desc);
             tabs->addTab(page, info.title);
             break;
         }

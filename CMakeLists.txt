@@ -26,6 +26,9 @@ set(PROJECT_SOURCES
         route.cpp
         route.h
         route.ui
+        pnpm.cpp
+        pnpm.h
+        pnpm.ui
         resources.qrc
         app.rc
 )
