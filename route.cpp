@@ -1,7 +1,6 @@
 #include "route.h"
 #include "./ui_route.h"
 
-#include <QFont>
 #include <QProcess>
 
 RouteSetup::RouteSetup(const QString &labelText, QWidget *parent)
@@ -23,10 +22,6 @@ RouteSetup::RouteSetup(const QString &labelText, QWidget *parent)
 RouteSetup::~RouteSetup()
 {
     delete ui;
-}
-
-void RouteSetup::setPageLabel(const QString &text)
-{
 }
 
 void RouteSetup::onRouteAdd()

@@ -17,8 +17,6 @@ public:
     explicit UVSetup(const QString &labelText, QWidget *parent = nullptr);
     ~UVSetup() override;
 
-    void setPageLabel(const QString &text);
-
 private slots:
     void onBrowseCacheDir();
     void onBrowsePythonDir();

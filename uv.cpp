@@ -12,11 +12,6 @@ UVSetup::UVSetup(const QString &labelText, QWidget *parent)
     , ui(new Ui::UVSetup)
 {
     ui->setupUi(this);
-    ui->pageLabel->setText(labelText);
-
-    QFont font = ui->pageLabel->font();
-    font.setPointSize(14);
-    ui->pageLabel->setFont(font);
 
     initUV();
 
@@ -37,19 +32,11 @@ UVSetup::~UVSetup()
     delete ui;
 }
 
-void UVSetup::setPageLabel(const QString &text)
-{
-    ui->pageLabel->setText(text);
-}
-
 void UVSetup::initUV()
 {
     ui->lineEdit_CACHE_DIR->setText(runUVCommand("cache dir"));
     ui->lineEdit_PTHON_DIR->setText(runUVCommand("python dir"));
     ui->lineEdit_tool_dir->setText(runUVCommand("tool dir --bin"));
-
-
-
 }
 
 QString UVSetup::runUVCommand(const QString &args)

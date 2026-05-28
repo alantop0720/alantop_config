@@ -17,8 +17,6 @@ public:
     explicit RouteSetup(const QString &labelText, QWidget *parent = nullptr);
     ~RouteSetup() override;
 
-    void setPageLabel(const QString &text);
-
 private slots:
     void onRouteAdd();
     void onRouteDelete();

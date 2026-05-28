@@ -17,8 +17,6 @@ public:
     explicit SysOpt(const QString &labelText, QWidget *parent = nullptr);
     ~SysOpt() override;
 
-    void setPageLabel(const QString &text);
-
 private slots:
     void onDelTemp();
 

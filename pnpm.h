@@ -17,8 +17,6 @@ public:
     explicit PnpmSetup(const QString &labelText, QWidget *parent = nullptr);
     ~PnpmSetup() override;
 
-    void setPageLabel(const QString &text);
-
 private:
     Ui::PnpmSetup *ui;
 };

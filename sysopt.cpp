@@ -9,11 +9,6 @@ SysOpt::SysOpt(const QString &labelText, QWidget *parent)
     , ui(new Ui::SysOpt)
 {
     ui->setupUi(this);
-    ui->pageLabel->setText(labelText);
-
-    QFont font = ui->pageLabel->font();
-    font.setPointSize(14);
-    ui->pageLabel->setFont(font);
 
     connect(ui->pushButton_del_temp, &QPushButton::clicked,
             this, &SysOpt::onDelTemp);
@@ -22,11 +17,6 @@ SysOpt::SysOpt(const QString &labelText, QWidget *parent)
 SysOpt::~SysOpt()
 {
     delete ui;
-}
-
-void SysOpt::setPageLabel(const QString &text)
-{
-    ui->pageLabel->setText(text);
 }
 
 void SysOpt::onDelTemp()

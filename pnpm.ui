@@ -13,20 +13,118 @@
   <property name="windowTitle">
    <string notr="true"/>
   </property>
-  <widget class="QLabel" name="pageLabel">
+  <widget class="QLineEdit" name="lineEdit_root">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>100</width>
-     <height>20</height>
+     <x>120</x>
+     <y>80</y>
+     <width>300</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>pnpm设置</string>
+    <string>pnpm root -g</string>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_rm">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>160</y>
+     <width>300</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>pnpm rm -g </string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_uninstall">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>240</y>
+     <width>300</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>npm uninstall -g pnpm</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_root">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>80</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查看目录</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_rm">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>160</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除包</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_uninstall">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>240</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>卸载pnpm</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="plainTextEdit_state">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>310</y>
+     <width>451</width>
+     <height>171</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_ls">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>30</y>
+     <width>300</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>pnpm ls -g</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ls">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>30</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查看包</string>
    </property>
   </widget>
  </widget>
